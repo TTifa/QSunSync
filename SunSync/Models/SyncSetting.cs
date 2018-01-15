@@ -34,6 +34,11 @@ namespace SunSync.Models
         //upload entry domain
         public int UploadEntryDomain { set; get; }
 
+        //计划任务相关配置
+        public bool EnableSchedule { get; set; }
+        public TimeSpanType TimeSpanType { get; set; }
+        public int TimeSpan { get; set; }
+
         /// <summary>
         /// load sync settings from the database by job id
         /// </summary>

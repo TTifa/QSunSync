@@ -124,10 +124,6 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Qiniu, Version=7.3.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\csharp-sdk\src\Qiniu\bin\x64\Debug\Qiniu.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
@@ -170,6 +166,7 @@
     <Compile Include="Models\SyncRecord.cs" />
     <Compile Include="Models\SyncSetting.cs" />
     <Compile Include="Models\SystemConfig.cs" />
+    <Compile Include="Models\TimeSpanType.cs" />
     <Compile Include="Models\Tools.cs" />
     <Compile Include="Models\UploadInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -298,6 +295,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Qiniu\Qiniu.csproj">
+      <Project>{2f5b0328-de8b-4b53-a500-3077e340a51b}</Project>
+      <Name>Qiniu</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.2\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net40\System.Data.SQLite.Core.targets')" />

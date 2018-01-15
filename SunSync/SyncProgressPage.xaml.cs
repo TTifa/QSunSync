@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
+using System.Windows.Threading;
 
 namespace SunSync
 {
@@ -18,6 +19,8 @@ namespace SunSync
     {
         private SyncSetting syncSetting;
         private MainWindow mainWindow;
+        //定时器  
+        private DispatcherTimer mDataTimer = null;
 
         private string jobId;
         private string jobLogDir;
@@ -95,7 +98,7 @@ namespace SunSync
         private SQLiteConnection localHashDB;
 
         private string jobsDbPath;
-
+        //需要上传的文件列表
         private List<string> batchOpFiles;
 
         private string cacheDir;
@@ -154,6 +157,12 @@ namespace SunSync
             //run new sync job
             Thread jobThread = new Thread(new ParameterizedThreadStart(this.runSyncJob));
             jobThread.Start(false);
+
+            if (this.syncSetting.EnableSchedule)
+            {
+                InitTimer(this.syncSetting.TimeSpanType, this.syncSetting.TimeSpan);
+                mDataTimer.Start();
+            }
         }
 
         private void resetSyncStatus()
@@ -588,7 +597,8 @@ namespace SunSync
                 this.fileOverwriteCount, this.fileOverwriteLogPath,
                 this.fileNotOverwriteCount, this.fileNotOverwriteLogPath,
                 this.fileUploadErrorCount, this.fileUploadErrorLogPath,
-                this.fileUploadSuccessCount, this.fileUploadSuccessLogPath);
+                this.fileUploadSuccessCount, this.fileUploadSuccessLogPath,
+                this.syncSetting.SyncLocalDir);
         }
 
         //halt or resume button click
@@ -829,7 +839,7 @@ namespace SunSync
                 ObservableCollection<UploadInfo> dataSource = new ObservableCollection<UploadInfo>();
                 foreach (UploadInfo info in this.uploadInfos)
                 {
-                    if (info!=null && !string.IsNullOrEmpty(info.Progress))
+                    if (info != null && !string.IsNullOrEmpty(info.Progress))
                     {
                         dataSource.Add(info);
                     }
@@ -910,5 +920,33 @@ namespace SunSync
             }
         }
 
+        #region 定时器
+        private void InitTimer(TimeSpanType type, int span)
+        {
+            if (mDataTimer == null)
+            {
+                mDataTimer = new DispatcherTimer();
+                mDataTimer.Tick += new EventHandler(DataTimer_Tick);
+                switch (type)
+                {
+                    case TimeSpanType.s: mDataTimer.Interval = TimeSpan.FromSeconds(span); break;
+                    case TimeSpanType.m: mDataTimer.Interval = TimeSpan.FromMinutes(span); break;
+                    case TimeSpanType.h: mDataTimer.Interval = TimeSpan.FromHours(span); break;
+                    case TimeSpanType.d: mDataTimer.Interval = TimeSpan.FromDays(span); break;
+                    default: mDataTimer.Interval = TimeSpan.FromMinutes(span); break;
+                }
+            }
+        }
+
+        private void DataTimer_Tick(object sender, EventArgs e)
+        {
+            //clear old sync status
+            this.resetSyncStatus();
+
+            //run new sync job
+            Thread jobThread = new Thread(new ParameterizedThreadStart(this.runSyncJob));
+            jobThread.Start(false);
+        }
+        #endregion
     }
 }

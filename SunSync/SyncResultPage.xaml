@@ -23,35 +23,39 @@
         </StackPanel>
         <StackPanel Grid.Row="1" Margin="10">
             <Border BorderBrush="LightGray" BorderThickness="1">
-            <Grid Height="435" Margin="20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0">
-                    <TextBlock FontSize="20" Name="UploadSuccessTextBlock1">##</TextBlock>
-                    <TextBlock FontSize="16" Name="UploadSuccessTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
-                </StackPanel>
-                <StackPanel Grid.Row="1">
-                    <TextBlock FontSize="20" Name="UploadFailureTextBlock1">##</TextBlock>
-                    <TextBlock FontSize="16" Name="UploadFailureTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
-                </StackPanel>
-                <StackPanel Grid.Row="2">
-                    <TextBlock FontSize="20" Name="UploadSkippedTextBlock1">##</TextBlock>
-                    <TextBlock FontSize="16" Name="UploadSkippedTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
-                </StackPanel>
-                <StackPanel Grid.Row="3">
-                    <TextBlock FontSize="20" Name="UploadExistsTextBlock1">##</TextBlock>
-                    <TextBlock FontSize="16" Name="UploadExistsTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
-                </StackPanel>
-                <StackPanel Grid.Row="4">
-                    <TextBlock FontSize="20" Name="UploadOverwriteTextBlock1">##</TextBlock>
-                    <TextBlock FontSize="16" Name="UploadOverwriteTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
-                </StackPanel>
-            </Grid>
+                <Grid Height="435" Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <TextBlock FontSize="20" Name="UploadDirTextBlock1">##</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1">
+                        <TextBlock FontSize="20" Name="UploadSuccessTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="16" Name="UploadSuccessTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2">
+                        <TextBlock FontSize="20" Name="UploadFailureTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="16" Name="UploadFailureTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3">
+                        <TextBlock FontSize="20" Name="UploadSkippedTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="16" Name="UploadSkippedTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4">
+                        <TextBlock FontSize="20" Name="UploadExistsTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="16" Name="UploadExistsTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="5">
+                        <TextBlock FontSize="20" Name="UploadOverwriteTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="16" Name="UploadOverwriteTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
+                    </StackPanel>
+                </Grid>
             </Border>
             <Grid Margin="0 10">
                 <Grid.ColumnDefinitions>

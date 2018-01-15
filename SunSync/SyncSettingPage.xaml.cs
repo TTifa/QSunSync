@@ -22,13 +22,14 @@ namespace SunSync
         private int defaultChunkSize;
         //upload entry domain
         private int uploadEntryDomain;
+
         private MainWindow mainWindow;
 
         private Account account;
-        private Domains domains; 
+        private Domains domains;
         private SyncSetting syncSetting;
         private BucketManager bucketManager;
-
+        private TimeSpanType timeType;
         public SyncSettingPage(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -54,7 +55,7 @@ namespace SunSync
         {
             //set global domains
             this.domains = Domains.TryLoadDomains();
-            if (this.domains != null && !string.IsNullOrEmpty(this.domains.RsDomain) && 
+            if (this.domains != null && !string.IsNullOrEmpty(this.domains.RsDomain) &&
                 !string.IsNullOrEmpty(this.domains.UpDomain))
             {
                 SystemConfig.RS_DOMAIN = this.domains.RsDomain;
@@ -95,7 +96,7 @@ namespace SunSync
                 return;
             }
             Mac mac = new Mac(this.account.AccessKey, this.account.SecretKey);
-            Config config =new Config();
+            Config config = new Config();
             if (this.domains != null && !string.IsNullOrEmpty(domains.RsDomain))
             {
                 Qiniu.Storage.Config.DefaultRsHost = domains.RsDomain;
@@ -160,7 +161,8 @@ namespace SunSync
                 this.ChunkUploadThresholdSlider.Value = syncSetting.ChunkUploadThreshold / 1024 / 1024;
                 this.ChunkDefaultSizeSlider.Value = syncSetting.DefaultChunkSize;
                 this.ChunkDefaultSizeLabel.Content = syncSetting.DefaultChunkSize.ToString();
-                switch (syncSetting.UploadEntryDomain) {
+                switch (syncSetting.UploadEntryDomain)
+                {
                     case 0:
                         this.UploadByCdnRadioButton.IsChecked = true;
                         break;
@@ -300,7 +302,7 @@ namespace SunSync
 
             string syncTargetBucket = this.SyncTargetBucketsComboBox.SelectedItem.ToString();
             StatResult statResult = this.bucketManager.Stat(syncTargetBucket, "NONE_EXIST_KEY");
-    
+
             if (statResult.Code == 401)
             {
                 //ak & sk not right
@@ -323,7 +325,7 @@ namespace SunSync
             {
                 this.SettingsErrorTextBlock.Text = "网络故障";
                 Log.Error(string.Format("get buckets unknown error, {0}:{1}:{2}:{3}", statResult.Code,
-                       statResult.Text, statResult.RefInfo["X-Reqid"],System.Text.Encoding.UTF8.GetString(statResult.Data)));
+                       statResult.Text, statResult.RefInfo["X-Reqid"], System.Text.Encoding.UTF8.GetString(statResult.Data)));
                 return;
             }
 
@@ -346,6 +348,22 @@ namespace SunSync
             syncSetting.ChunkUploadThreshold = (int)this.ChunkUploadThresholdSlider.Value * 1024 * 1024;
             syncSetting.DefaultChunkSize = this.defaultChunkSize;
             syncSetting.UploadEntryDomain = this.uploadEntryDomain;
+
+            //启用计划任务
+            syncSetting.EnableSchedule = this.EnableScheduleCheckBox.IsChecked.Value;
+            if (syncSetting.EnableSchedule)
+            {
+                if (string.IsNullOrEmpty(this.TimeSpanTextBox.Text))
+                {
+                    //未选择间隔时间
+                    System.Windows.Forms.MessageBox.Show("请输入间隔时间！",
+                    "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                syncSetting.TimeSpanType = this.timeType;
+                syncSetting.TimeSpan = Convert.ToInt32(this.TimeSpanTextBox.Text);
+            }
 
             this.mainWindow.GotoSyncProgress(syncSetting);
         }
@@ -393,6 +411,26 @@ namespace SunSync
             {
                 this.ChunkDefaultSizeLabel.Content = this.ChunkDefaultSizeSlider.Value.ToString();
             }
+        }
+
+        private void SelectDay(object sender, RoutedEventArgs e)
+        {
+            this.timeType = TimeSpanType.d;
+        }
+
+        private void SelectHour(object sender, RoutedEventArgs e)
+        {
+            this.timeType = TimeSpanType.h;
+        }
+
+        private void SelectMin(object sender, RoutedEventArgs e)
+        {
+            this.timeType = TimeSpanType.m;
+        }
+
+        private void SelectSec(object sender, RoutedEventArgs e)
+        {
+            this.timeType = TimeSpanType.s;
         }
     }
 
