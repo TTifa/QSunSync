@@ -81,7 +81,7 @@ namespace SunSync
         {
             Log.Info(string.Format("sync last total time {0}", this.spentTimeStr(this.spentTime.TotalSeconds)));
             //set title
-            this.SyncResultTitleTextBlock.Text = $"{this.spentTimeStr(this.spentTime.TotalSeconds)}({DateTime.Now.ToString("HH:mm:ss")})";
+            this.SyncResultTitleTextBlock.Text = this.spentTimeStr(this.spentTime.TotalSeconds) + $"({DateTime.Now.ToString("HH:mm:ss")})";
 
             this.UploadDirTextBlock1.Text = string.Format("同步目录：{0}", this.fileDir);
 

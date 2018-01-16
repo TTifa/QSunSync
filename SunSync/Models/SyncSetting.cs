@@ -33,8 +33,8 @@ namespace SunSync.Models
         public int SyncThreadCount { set; get; }
         //upload entry domain
         public int UploadEntryDomain { set; get; }
-
-        //计划任务相关配置
+        public string SkipDir { get; set; }
+        //启用计划任务
         public bool EnableSchedule { get; set; }
         public TimeSpanType TimeSpanType { get; set; }
         public int TimeSpan { get; set; }
@@ -78,6 +78,7 @@ namespace SunSync.Models
                                 setting.IgnoreDir = Convert.ToBoolean(dr["ignore_dir"]);
                                 setting.SkipPrefixes = Convert.ToString(dr["skip_prefixes"]);
                                 setting.SkipSuffixes = Convert.ToString(dr["skip_suffixes"]);
+                                setting.SkipDir = Convert.ToString(dr["skip_dir"]);
                                 setting.OverwriteFile = Convert.ToBoolean(dr["overwrite_file"]);
                                 setting.DefaultChunkSize = Convert.ToInt32(dr["default_chunk_size"]);
                                 setting.ChunkUploadThreshold = Convert.ToInt32(dr["chunk_upload_threshold"]);

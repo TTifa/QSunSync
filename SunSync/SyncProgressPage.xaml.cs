@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
 using System.Windows.Threading;
+using System.Text.RegularExpressions;
 
 namespace SunSync
 {
@@ -243,6 +244,8 @@ namespace SunSync
         private void processDir(string rootDir, string targetDir, StreamWriter sw)
         {
             this.updateUploadLog(string.Format("正在遍历目录 {0} ...", targetDir));
+            var regexString = string.IsNullOrEmpty(this.syncSetting.SkipDir) ? @"[\s]+" : this.syncSetting.SkipDir;
+            var skipDirRegex = new Regex(regexString);//匹配忽略文件夹名称,默认忽略非可见字符串
             try
             {
                 string[] fileEntries = Directory.GetFiles(targetDir);
@@ -275,12 +278,17 @@ namespace SunSync
             try
             {
                 string[] subDirs = Directory.GetDirectories(targetDir);
+
                 foreach (string subDir in subDirs)
                 {
                     if (this.cancelSignal)
                     {
                         return;
                     }
+
+                    if (skipDirRegex.IsMatch(subDir))
+                        continue;
+
                     processDir(rootDir, subDir, sw);
                 }
             }

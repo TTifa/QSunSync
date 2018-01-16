@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="670" d:DesignWidth="680"
+      d:DesignHeight="700" d:DesignWidth="680"
 	Title="SyncSettingPage" Loaded="SyncSettingPageLoaded_EventHandler">
 
     <Grid>
@@ -24,7 +24,7 @@
         </StackPanel>
         <StackPanel Grid.Row="1" Margin="10">
             <StackPanel Orientation="Vertical">
-                <TabControl Height="500" Name="SyncSettingTabControl">
+                <TabControl Height="520" Name="SyncSettingTabControl">
                     <TabItem Header="基本设置" FontSize="16">
                         <StackPanel Orientation="Vertical" Width="500" Margin="10">
                             <StackPanel>
@@ -81,7 +81,11 @@
                                             <TextBox Width="350" Margin="10 0" VerticalContentAlignment="Center"
                                                      Name="PrefixTextBox" Foreground="Green"></TextBox>
                                         </StackPanel>
-                                        
+                                        <StackPanel Orientation="Horizontal" Margin="5">
+                                            <Label FontSize="16" Content="忽略子文件夹" VerticalAlignment="Center" Width="120"></Label>
+                                            <TextBox Width="350" Margin="10 0" VerticalContentAlignment="Center"
+                                                     Name="SkipDirTextBox" Foreground="Green"></TextBox>
+                                        </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="5">
                                             <Label FontSize="16" Content="按前缀跳过不传" VerticalAlignment="Center" Width="120"></Label>
                                             <TextBox Width="350" Margin="10 0" VerticalContentAlignment="Center"
@@ -144,7 +148,6 @@
 
                         </StackPanel>
                     </TabItem>
-
                     <TabItem Header="计划任务" FontSize="16">
                         <StackPanel Orientation="Vertical" Width="560" Margin="0">
                             <StackPanel>
@@ -171,7 +174,6 @@
                             </StackPanel>
                         </StackPanel>
                     </TabItem>
-
                 </TabControl>
 
                 <StackPanel>

@@ -156,6 +156,7 @@ namespace SunSync
                 this.IgnoreDirCheckBox.IsChecked = syncSetting.IgnoreDir;
                 this.SkipPrefixesTextBox.Text = syncSetting.SkipPrefixes;
                 this.SkipSuffixesTextBox.Text = syncSetting.SkipSuffixes;
+                this.SkipDirTextBox.Text = syncSetting.SkipDir;
                 this.ThreadCountSlider.Value = syncSetting.SyncThreadCount;
                 this.ThreadCountLabel.Content = syncSetting.SyncThreadCount.ToString();
                 this.ChunkUploadThresholdSlider.Value = syncSetting.ChunkUploadThreshold / 1024 / 1024;
@@ -348,6 +349,7 @@ namespace SunSync
             syncSetting.ChunkUploadThreshold = (int)this.ChunkUploadThresholdSlider.Value * 1024 * 1024;
             syncSetting.DefaultChunkSize = this.defaultChunkSize;
             syncSetting.UploadEntryDomain = this.uploadEntryDomain;
+            syncSetting.SkipDir = this.SkipDirTextBox.Text.Trim();
 
             //启用计划任务
             syncSetting.EnableSchedule = this.EnableScheduleCheckBox.IsChecked.Value;
