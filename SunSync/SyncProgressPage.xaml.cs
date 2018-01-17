@@ -21,7 +21,7 @@ namespace SunSync
         private SyncSetting syncSetting;
         private MainWindow mainWindow;
         //定时器  
-        private DispatcherTimer mDataTimer = null;
+        private static DispatcherTimer mDataTimer = null;
 
         private string jobId;
         private string jobLogDir;
@@ -164,7 +164,6 @@ namespace SunSync
             if (this.syncSetting.EnableSchedule)
             {
                 InitTimer(this.syncSetting.TimeSpanType, this.syncSetting.TimeSpan);
-                mDataTimer.Start();
             }
         }
 
@@ -967,17 +966,23 @@ namespace SunSync
                     case TimeSpanType.d: mDataTimer.Interval = TimeSpan.FromDays(span); break;
                     default: mDataTimer.Interval = TimeSpan.FromMinutes(span); break;
                 }
+
+                mDataTimer.Start();
             }
         }
 
         private void DataTimer_Tick(object sender, EventArgs e)
         {
+            this.mainWindow.GotoSyncProgress(this.syncSetting);
+
+            /*
             //clear old sync status
             this.resetSyncStatus();
 
             //run new sync job
             Thread jobThread = new Thread(new ParameterizedThreadStart(this.runSyncJob));
             jobThread.Start(false);
+            */
         }
         #endregion
     }
