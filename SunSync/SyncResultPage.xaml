@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="670" d:DesignWidth="700" Loaded="SyncResultLoaded_EventHandler"
+      d:DesignHeight="690" d:DesignWidth="700" Loaded="SyncResultLoaded_EventHandler"
 	Title="SyncResultPage">
 
     <Grid>
@@ -23,36 +23,37 @@
         </StackPanel>
         <StackPanel Grid.Row="1" Margin="10">
             <Border BorderBrush="LightGray" BorderThickness="1">
-                <Grid Height="435" Margin="20">
+                <Grid Height="470" Margin="15">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.5*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0">
-                        <TextBlock FontSize="20" Name="UploadDirTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="18" Name="UploadDirTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="16" Name="UploadDirTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="1">
-                        <TextBlock FontSize="20" Name="UploadSuccessTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="18" Name="UploadSuccessTextBlock1">##</TextBlock>
                         <TextBlock FontSize="16" Name="UploadSuccessTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="2">
-                        <TextBlock FontSize="20" Name="UploadFailureTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="18" Name="UploadFailureTextBlock1">##</TextBlock>
                         <TextBlock FontSize="16" Name="UploadFailureTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="3">
-                        <TextBlock FontSize="20" Name="UploadSkippedTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="18" Name="UploadSkippedTextBlock1">##</TextBlock>
                         <TextBlock FontSize="16" Name="UploadSkippedTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="4">
-                        <TextBlock FontSize="20" Name="UploadExistsTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="18" Name="UploadExistsTextBlock1">##</TextBlock>
                         <TextBlock FontSize="16" Name="UploadExistsTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="5">
-                        <TextBlock FontSize="20" Name="UploadOverwriteTextBlock1">##</TextBlock>
+                        <TextBlock FontSize="18" Name="UploadOverwriteTextBlock1">##</TextBlock>
                         <TextBlock FontSize="16" Name="UploadOverwriteTextBlock2" Foreground="Gray" Margin="10" TextWrapping="Wrap">##</TextBlock>
                     </StackPanel>
                 </Grid>

@@ -16,6 +16,7 @@ namespace SunSync
         private string jobId;
         private bool fileOverwrite;
         private string fileDir;
+        private int skipDirCount;
 
         private int fileSkippedCount;
         private int fileExistsCount;
@@ -55,12 +56,13 @@ namespace SunSync
             int fileNotOverwriteCount, string fileNotOverwriteLogPath,
             int fileUploadErrorCount, string fileUploadErrorLogPath,
             int fileUploadSuccessCount, string fileUploadSuccessLogPath,
-            string fileDir)
+            string fileDir, int skipDirCount)
         {
             this.jobId = jobId;
             this.spentTime = spentTime;
 
             this.fileDir = fileDir;
+            this.skipDirCount = skipDirCount;
             this.fileSkippedCount = fileSkippedCount;
             this.fileOverwrite = fileOverwrite;
             this.fileExistsCount = fileExistsCount;
@@ -84,6 +86,7 @@ namespace SunSync
             this.SyncResultTitleTextBlock.Text = this.spentTimeStr(this.spentTime.TotalSeconds) + $"({DateTime.Now.ToString("HH:mm:ss")})";
 
             this.UploadDirTextBlock1.Text = string.Format("同步目录：{0}", this.fileDir);
+            this.UploadDirTextBlock2.Text = $"正则匹配跳过子目录：{this.skipDirCount}";
 
             this.UploadSuccessTextBlock1.Text = string.Format("同步成功: {0}", this.fileUploadSuccessCount);
             this.UploadSuccessTextBlock2.Text = syncResultInfo["UPLOAD_SUCCESS"];

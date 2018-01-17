@@ -117,7 +117,7 @@ namespace SunSync
             int fileNotOverwriteCount, string fileNotOverwriteLogPath,
             int fileUploadErrorCount, string fileUploadErrorLogPath,
             int fileUploadSuccessCount, string fileUploadSuccessLogPath,
-            string fileDir)
+            string fileDir, int skipDirCount)
         {
             Dispatcher.Invoke(new Action(delegate
             {
@@ -129,7 +129,7 @@ namespace SunSync
                     fileNotOverwriteCount, fileNotOverwriteLogPath,
                     fileUploadErrorCount, fileUploadErrorLogPath,
                     fileUploadSuccessCount, fileUploadSuccessLogPath,
-                    fileDir);
+                    fileDir, skipDirCount);
             }));
         }
 

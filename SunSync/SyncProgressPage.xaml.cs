@@ -36,6 +36,7 @@ namespace SunSync
         //value is datetime in milliseconds +":"+uploadedBytes
         private Dictionary<string, string> uploadedBytes;
 
+        private object dirSkippedLock;
         private object fileSkippedLock;
         private object fileExistsLock;
         private object fileOverwriteLock;
@@ -43,6 +44,7 @@ namespace SunSync
         private object fileUploadErrorLock;
         private object fileUploadSuccessLock;
 
+        private int dirSkippedCount;
         private int fileSkippedCount;
         private int fileExistsCount;
         private int fileOverwriteCount;
@@ -172,6 +174,8 @@ namespace SunSync
             this.totalCount = 0;
             this.progressLock = new object();
             this.uploadLogLock = new object();
+            this.dirSkippedCount = 0;
+            this.dirSkippedLock = new object();
             this.fileSkippedCount = 0;
             this.fileSkippedLock = new object();
             this.fileExistsCount = 0;
@@ -287,7 +291,10 @@ namespace SunSync
                     }
 
                     if (skipDirRegex.IsMatch(subDir))
+                    {
+                        addDirSkippedLog(string.Format("{0}\t{1}", this.syncSetting.SyncTargetBucket, subDir));
                         continue;
+                    }
 
                     processDir(rootDir, subDir, sw);
                 }
@@ -606,7 +613,7 @@ namespace SunSync
                 this.fileNotOverwriteCount, this.fileNotOverwriteLogPath,
                 this.fileUploadErrorCount, this.fileUploadErrorLogPath,
                 this.fileUploadSuccessCount, this.fileUploadSuccessLogPath,
-                this.syncSetting.SyncLocalDir);
+                this.syncSetting.SyncLocalDir, this.dirSkippedCount);
         }
 
         //halt or resume button click
@@ -653,6 +660,23 @@ namespace SunSync
             catch (Exception ex)
             {
                 Log.Error(string.Format("drop cache file {0} failed due to {1}", this.cacheFilePathDone, ex.Message));
+            }
+        }
+
+        internal void addDirSkippedLog(string log)
+        {
+            lock (this.dirSkippedLock)
+            {
+                this.dirSkippedCount += 1;
+
+                try
+                {
+                    this.fileSkippedWriter.WriteLine(log);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(string.Format("write dir skipped log for {0} failed due to {1}", this.jobId, ex.Message));
+                }
             }
         }
 

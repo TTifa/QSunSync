@@ -26,4 +26,4 @@ _testmain.go
 *.test
 *.prof
 packages/
-/.vs/SunSync/v15
+/.vs/
