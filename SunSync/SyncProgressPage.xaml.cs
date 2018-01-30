@@ -139,7 +139,8 @@ namespace SunSync
             string jobName = string.Join("\t", new string[] { syncSetting.SyncLocalDir, syncSetting.SyncTargetBucket });
             this.jobId = Tools.md5Hash(jobName);
 
-            string myDocPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string myDocPath = AppDomain.CurrentDomain.BaseDirectory;
+
             this.jobsDbPath = System.IO.Path.Combine(myDocPath, "qsunsync", "jobs.db");
             this.jobLogDir = System.IO.Path.Combine(myDocPath, "qsunsync", "logs", jobId);
             this.localHashDBPath = System.IO.Path.Combine(myDocPath, "qsunsync", "hash.db");

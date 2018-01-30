@@ -28,7 +28,7 @@ namespace SunSync
             InitializeComponent();
             this.mainWindow = mainWindow;
             this.syncRecordDict = new Dictionary<ListBoxItem, string>();
-            string myDocPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string myDocPath = Environment.CurrentDirectory;
             this.myAppPath = System.IO.Path.Combine(myDocPath, "qsunsync");
             if (!Directory.Exists(myAppPath))
             {

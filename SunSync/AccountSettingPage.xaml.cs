@@ -71,7 +71,7 @@ namespace SunSync
             Account account = (Account)accountObj;
             //write settings to local file
             string accData = JsonConvert.SerializeObject(account);
-            string myDocPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string myDocPath = Environment.CurrentDirectory;
             string appDir = System.IO.Path.Combine(myDocPath, "qsunsync");
             try
             {

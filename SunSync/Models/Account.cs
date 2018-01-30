@@ -21,7 +21,7 @@ namespace SunSync.Models
         public static Account TryLoadAccount()
         {
             Account acct = new Account();
-            string myDocPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string myDocPath = Environment.CurrentDirectory;
             string accPath = System.IO.Path.Combine(myDocPath, "qsunsync", "account.json");
             if (File.Exists(accPath))
             {

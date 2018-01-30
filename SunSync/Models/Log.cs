@@ -11,7 +11,7 @@ namespace SunSync.Models
         private static TraceSource logSource = new TraceSource("QSunSync");
         public static void Init()
         {
-            string myDocPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string myDocPath = Environment.CurrentDirectory;
             string syncLogPath = System.IO.Path.Combine(myDocPath, "qsunsync", "sync.log");
 
             logSource.Switch = new SourceSwitch("logSwitch");

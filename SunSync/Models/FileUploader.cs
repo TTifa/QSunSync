@@ -110,7 +110,7 @@ namespace SunSync.Models
 
             //set upload params
 
-            string myDocPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string myDocPath = Environment.CurrentDirectory;
             string recordPath = System.IO.Path.Combine(myDocPath, "qsunsync", "resume");
             if (!Directory.Exists(recordPath))
             {

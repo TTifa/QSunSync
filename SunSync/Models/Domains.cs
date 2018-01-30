@@ -21,7 +21,7 @@ namespace SunSync.Models
         public static Domains TryLoadDomains()
         {
             Domains domains = new Domains();
-            string myDocPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string myDocPath = Environment.CurrentDirectory;
             string accPath = System.IO.Path.Combine(myDocPath, "qsunsync", "domains.json");
             if (File.Exists(accPath))
             {

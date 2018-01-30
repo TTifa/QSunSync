@@ -49,7 +49,7 @@ namespace SunSync.Models
         public static SyncSetting LoadSyncSettingByJobId(string syncId)
         {
             SyncSetting setting = null;
-            string myDocPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string myDocPath = Environment.CurrentDirectory;
             string jobsDb = System.IO.Path.Combine(myDocPath, "qsunsync", "jobs.db");
 
             if (File.Exists(jobsDb))
